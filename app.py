@@ -40,9 +40,10 @@ def browser():
         
     
 now = datetime.now()
-start = datetime(now.year, now.month, now.day, now.hour, 40)
+start = datetime(now.year, now.month, now.day, now.hour, 33)
 diff = start - now
 
+print("Set Sched")
 scheduler = sched.scheduler(time.time, time.sleep)
 scheduler.enter(diff.seconds, 1, browser)
 scheduler.run()
