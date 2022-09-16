@@ -10,6 +10,7 @@ RETRY = 0
 
 def browser():
     print("Start Browsing")
+    print((os.environ.get('URL')))
     
 now = datetime.datetime.today()
 if 27 < now.minute < 30:
