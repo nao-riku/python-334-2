@@ -3,6 +3,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions
+import sched
 import datetime
 import time
 
@@ -36,9 +37,12 @@ def browser():
     else:
         driver.quit()
         print("End")
+        
     
-now = datetime.datetime.today()
-if 27 < now.minute < 30:
-    print("yet")
-else:
-    browser()
+now = datetime.now()
+start = datetime(now.year, now.month, now.day, now.hour, 40)
+diff = start - now
+
+scheduler = sched.scheduler(time.time, time.sleep)
+scheduler.enter(diff.seconds, 1, browser)
+scheduler.run()
