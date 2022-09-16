@@ -19,9 +19,23 @@ def browser():
     driver = webdriver.Chrome(options=options)
     driver.set_window_size(620, 1)
     driver.get(os.environ['URL']) 
-    time.sleep(3)
-    driver.quit()
-    print("End")
+    try:
+        wait = WebDriverWait(driver, 30)
+        wait.until(expected_conditions.alert_is_present())
+    except Exception as e:
+        driver.quit()
+        print("Err")
+        print(e)
+        global RETRY
+        if RETRY < 4:
+            time.sleep(5)
+            RETRY += 1
+            browser()
+        else:
+            print("AllErr")
+    else:
+        driver.quit()
+        print("End")
     
 now = datetime.datetime.today()
 if 27 < now.minute < 30:
