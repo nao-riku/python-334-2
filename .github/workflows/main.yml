@@ -5,6 +5,7 @@ on:
 
 jobs:
   build:
+    environment: Ranker
     runs-on: ubuntu-latest
 
     steps:
