@@ -40,7 +40,9 @@ def browser():
         
     
 now = datetime.datetime.now()
+print(now)
 start = datetime.datetime(now.year, now.month, now.day, now.hour, 34)
+print(start)
 diff = start - now
 
 print("Set Sched")
