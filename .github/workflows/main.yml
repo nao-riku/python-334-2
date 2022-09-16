@@ -3,6 +3,7 @@ name: 334Ranker
 on:
   schedule:
     - cron: '1,30 14 * * *'
+    - cron: '4 23 * * *'
     
   workflow_dispatch:
 
