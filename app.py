@@ -11,4 +11,8 @@ RETRY = 0
 def browser():
     print("Start Browsing")
     
-browser()
+now = datetime.datetime.today()
+if 27 < now.minute < 30:
+    print("yet")
+else:
+    browser()
