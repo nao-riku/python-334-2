@@ -21,4 +21,5 @@ jobs:
       - name: Run Python
         env:
           URL: ${{ secrets.URL }}
+          TZ: "Asia/Tokyo"
         run: python app.py
