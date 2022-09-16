@@ -9,17 +9,16 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-
-      - name: Setup Python
-        uses: actions/setup-python@v2
+      - uses: actions/setup-python@v2
         with:
           python-version: '3.8'
           architecture: 'x64'
           
-      - name: Get Python version
-        run: python -V
-      - name: Install dependencies
-        run: pip install -r requirements.txt
+      - run: |
+          python -V
+          pip install get-chrome-driver --upgrade
+          pip install -r selenium/requirements.txt
+          
       - name: Run Python
         env:
           URL: ${{ secrets.URL }}
