@@ -39,7 +39,7 @@ def browser():
         print("End")
         
     
-now = datetime.datetime.datetime.now()
+now = datetime.datetime.now()
 start = datetime.datetime(now.year, now.month, now.day, now.hour, 41)
 diff = start - now
 
