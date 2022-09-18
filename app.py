@@ -175,7 +175,7 @@ delete = delete_all_rules(rules)
 set = set_rules(delete)
    
 now = datetime.datetime.now()
-start = datetime.datetime(now.year, now.month, now.day, now.hour, 33, 40, 0)
+start = datetime.datetime(now.year, now.month, now.day, 27 - 9, 33, 40, 0)
 diff = start - now
 print("Start sleep")
 time.sleep(diff.total_seconds())
