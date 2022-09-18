@@ -33,7 +33,7 @@ def browser(tweets):
     try:
         wait = WebDriverWait(driver, 10).until(expected_conditions.alert_is_present())
         Alert(driver).accept()
-        pyperclip.copy(json.dumps(tweets))
+        pyperclip.copy(tweets)
         actions = ActionChains(driver)
         actions.key_down(Keys.TAB)
         actions.key_down(Keys.TAB)
@@ -107,11 +107,11 @@ def get_stream(headers):
     tweet_list = []
     now = datetime.datetime.now()
     start_time = datetime.datetime(now.year, now.month, now.day, 3, 34, 0)
-    start_time = datetime.datetime(now.year, now.month, now.day, 4, 9, 0)
+    start_time = datetime.datetime(now.year, now.month, now.day, 4, 17, 0)
     end_time = datetime.datetime(now.year, now.month, now.day, 3, 34, 1)
-    end_time = datetime.datetime(now.year, now.month, now.day, 4, 9, 5)
+    end_time = datetime.datetime(now.year, now.month, now.day, 4, 17, 5)
     send_time = datetime.datetime(now.year, now.month, now.day, 3, 34, 2)
-    send_time = datetime.datetime(now.year, now.month, now.day, 4, 9, 6)
+    send_time = datetime.datetime(now.year, now.month, now.day, 4, 17, 6)
     send_flag = True
     run = 1
     while run:
@@ -174,7 +174,7 @@ set = set_rules(delete)
    
 now = datetime.datetime.now()
 start = datetime.datetime(now.year, now.month, now.day, 3, 33, 40, 0)
-start = datetime.datetime(now.year, now.month, now.day, 4, 8, 40, 0)
+start = datetime.datetime(now.year, now.month, now.day, 4, 16, 40, 0)
 now = datetime.datetime.now()
 diff = start - now
 print("Start sleep")
