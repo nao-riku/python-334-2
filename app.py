@@ -107,11 +107,11 @@ def get_stream(headers):
     tweet_list = []
     now = datetime.datetime.now()
     start_time = datetime.datetime(now.year, now.month, now.day, 3, 34, 0)
-    start_time = datetime.datetime(now.year, now.month, now.day, 3, 45, 0)
+    start_time = datetime.datetime(now.year, now.month, now.day, 3, 49, 0)
     end_time = datetime.datetime(now.year, now.month, now.day, 3, 34, 1)
-    end_time = datetime.datetime(now.year, now.month, now.day, 3, 45, 5)
+    end_time = datetime.datetime(now.year, now.month, now.day, 3, 49, 5)
     send_time = datetime.datetime(now.year, now.month, now.day, 3, 34, 2)
-    send_time = datetime.datetime(now.year, now.month, now.day, 3, 45, 6)
+    send_time = datetime.datetime(now.year, now.month, now.day, 3, 49, 6)
     send_flag = True
     run = 1
     while run:
@@ -141,7 +141,7 @@ def get_stream(headers):
 							
                         if send_time.time() < d.time() and send_flag:
                             send_flag = False
-                            tweet_list = sorted(tweet_list, reverse=True, key=lambda x: x[1])
+                            tweet_list = sorted(tweet_list, reverse=True, key=lambda x: x[2])
                             browser(json.dumps(tweet_list))
 
         except ChunkedEncodingError as chunkError:
@@ -174,7 +174,7 @@ set = set_rules(delete)
    
 now = datetime.datetime.now()
 start = datetime.datetime(now.year, now.month, now.day, 3, 33, 40, 0)
-start = datetime.datetime(now.year, now.month, now.day, 3, 44, 40, 0)
+start = datetime.datetime(now.year, now.month, now.day, 3, 49, 40, 0)
 now = datetime.datetime.now()
 diff = start - now
 print("Start sleep")
