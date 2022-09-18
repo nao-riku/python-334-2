@@ -7,6 +7,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions
 from requests_oauthlib import OAuth1Session
+import pyperclip
 import requests
 import traceback
 import datetime
@@ -105,11 +106,11 @@ def get_stream(headers):
     tweet_list = []
     now = datetime.datetime.now()
     start_time = datetime.datetime(now.year, now.month, now.day, 3, 34, 0)
-    start_time = datetime.datetime(now.year, now.month, now.day, 2, 48, 0)
+    start_time = datetime.datetime(now.year, now.month, now.day, 2, 52, 0)
     end_time = datetime.datetime(now.year, now.month, now.day, 3, 34, 1)
-    end_time = datetime.datetime(now.year, now.month, now.day, 2, 48, 1)
+    end_time = datetime.datetime(now.year, now.month, now.day, 2, 52, 1)
     send_time = datetime.datetime(now.year, now.month, now.day, 3, 34, 2)
-    send_time = datetime.datetime(now.year, now.month, now.day, 2, 48, 2)
+    send_time = datetime.datetime(now.year, now.month, now.day, 2, 52, 2)
     send_flag = True
     run = 1
     while run:
@@ -172,7 +173,7 @@ set = set_rules(delete)
    
 now = datetime.datetime.now()
 start = datetime.datetime(now.year, now.month, now.day, 3, 33, 40, 0)
-start = datetime.datetime(now.year, now.month, now.day, 2, 48, 40, 0)
+start = datetime.datetime(now.year, now.month, now.day, 2, 51, 40, 0)
 now = datetime.datetime.now()
 diff = start - now
 print("Start sleep")
