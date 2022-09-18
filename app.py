@@ -106,11 +106,11 @@ def get_stream(headers):
     tweet_list = []
     now = datetime.datetime.now()
     start_time = datetime.datetime(now.year, now.month, now.day, 3, 34, 0)
-    start_time = datetime.datetime(now.year, now.month, now.day, 2, 41, 0)
+    start_time = datetime.datetime(now.year, now.month, now.day, 2, 44, 0)
     end_time = datetime.datetime(now.year, now.month, now.day, 3, 34, 1)
-    end_time = datetime.datetime(now.year, now.month, now.day, 2, 41, 1)
+    end_time = datetime.datetime(now.year, now.month, now.day, 2, 44, 1)
     send_time = datetime.datetime(now.year, now.month, now.day, 3, 34, 2)
-    send_time = datetime.datetime(now.year, now.month, now.day, 2, 41, 2)
+    send_time = datetime.datetime(now.year, now.month, now.day, 2, 44, 2)
     send_flag = True
     run = 1
     while run:
@@ -121,11 +121,11 @@ def get_stream(headers):
                 for response_line in response.iter_lines():
                     if response_line:
                         json_response = json.loads(response_line)
+                        tweet_text = json_response["data"]["text"]
                         epoch = ((int(json_response["data"]["id"]) >> 22) + 1288834974657) / 1000.0
                         d = datetime.datetime.fromtimestamp(epoch)
                         if tweet_text != "334":##########################
                             if start_time.time() <= d.time() < end_time.time():
-                                tweet_text = json_response["data"]["text"]
                                 diff = d - start_time
                                 tweetdata = [
                                     json_response["includes"]["users"][0]["profile_image_url"],
@@ -173,7 +173,7 @@ set = set_rules(delete)
    
 now = datetime.datetime.now()
 start = datetime.datetime(now.year, now.month, now.day, 3, 33, 40, 0)
-start = datetime.datetime(now.year, now.month, now.day, 2, 40, 40, 0)
+start = datetime.datetime(now.year, now.month, now.day, 2, 43, 40, 0)
 now = datetime.datetime.now()
 diff = start - now
 print("Start sleep")
