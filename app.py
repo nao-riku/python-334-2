@@ -107,11 +107,11 @@ def get_stream(headers):
     tweet_list = []
     now = datetime.datetime.now()
     start_time = datetime.datetime(now.year, now.month, now.day, 3, 34, 0)
-    start_time = datetime.datetime(now.year, now.month, now.day, 3, 57, 0)
+    start_time = datetime.datetime(now.year, now.month, now.day, 4, 9, 0)
     end_time = datetime.datetime(now.year, now.month, now.day, 3, 34, 1)
-    end_time = datetime.datetime(now.year, now.month, now.day, 3, 57, 5)
+    end_time = datetime.datetime(now.year, now.month, now.day, 4, 9, 5)
     send_time = datetime.datetime(now.year, now.month, now.day, 3, 34, 2)
-    send_time = datetime.datetime(now.year, now.month, now.day, 3, 57, 6)
+    send_time = datetime.datetime(now.year, now.month, now.day, 4, 9, 6)
     send_flag = True
     run = 1
     while run:
@@ -174,7 +174,7 @@ set = set_rules(delete)
    
 now = datetime.datetime.now()
 start = datetime.datetime(now.year, now.month, now.day, 3, 33, 40, 0)
-start = datetime.datetime(now.year, now.month, now.day, 3, 56, 40, 0)
+start = datetime.datetime(now.year, now.month, now.day, 4, 8, 40, 0)
 now = datetime.datetime.now()
 diff = start - now
 print("Start sleep")
