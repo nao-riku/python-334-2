@@ -51,9 +51,11 @@ def browser(tweets):
             browser()
         else:
             print("AllErr")
+            sys.exit()
     else:
         driver.quit()
         print("End")
+        sys.exit()
 
 
 consumer_key = os.environ['CK']
@@ -101,15 +103,13 @@ def set_rules(delete):
 
 def get_stream(headers):
     global oath
-    run = 1
-    tweet_list1 = []
-    tweet_list2 = []
+    tweet_list = []
     now = datetime.datetime.now()
     start_time = datetime.datetime(now.year, now.month, now.day, 27 - 9, 34, 0)
-    end_time1 = datetime.datetime(now.year, now.month, now.day, 27 - 9, 34, 1)
+    end_time = datetime.datetime(now.year, now.month, now.day, 27 - 9, 34, 1)
     send_time = datetime.datetime(now.year, now.month, now.day, 27 - 9, 34, 2)
     send_flag = True
-    end_time2 = datetime.datetime(now.year, now.month, now.day, 27 - 9, 35, 0)
+    run = 1
     while run:
         try:
             with requests.get("https://api.twitter.com/2/tweets/search/stream?tweet.fields=id,source,text&expansions=author_id&user.fields=id,name,profile_image_url,username", auth=bearer_oauth, stream=True) as response:
@@ -118,12 +118,12 @@ def get_stream(headers):
                 for response_line in response.iter_lines():
                     if response_line:
                         json_response = json.loads(response_line)
-                        tweet_text = json_response["data"]["text"]
+                        epoch = ((int(json_response["data"]["id"]) >> 22) + 1288834974657) / 1000.0
+                        d = datetime.datetime.fromtimestamp(epoch)
                         if tweet_text == "334":
-                            epoch = ((int(json_response["data"]["id"]) >> 22) + 1288834974657) / 1000.0
-                            d = datetime.datetime.fromtimestamp(epoch)
-                            diff = d - start_time
-                            if start_time <= d < end_time1:
+                            if start_time <= d < end_time:
+                                tweet_text = json_response["data"]["text"]
+                                diff = d - start_time
                                 tweetdata = [
                                     json_response["includes"]["users"][0]["profile_image_url"],
                                     json_response["includes"]["users"][0]["name"],
@@ -133,23 +133,12 @@ def get_stream(headers):
                                     json_response["includes"]["users"][0]["username"],
                                     json_response["data"]["author_id"]
                                 ]
-                                tweet_list1.append(tweetdata)
-                            if start_time <= d < end_time2:
-                                tweetdata2 = [
-                                    str(json_response["data"]["author_id"]),
-                                    json_response["includes"]["users"][0]["name"],
-                                    '{:.3f}'.format(diff.total_seconds())
-                                ]
-                                tweet_list2.append(tweetdata2)
-                            if send_time < d and send_flag:
-                                send_flag = False
-                                tweet_list1 = sorted(tweet_list1, reverse=True, key=lambda x: x[1])
-                                browser(json.dumps(tweet_list1))
+                                tweet_list.append(tweetdata)
 							
-                        if endtime2 <= datetime.datetime.now():
-                            tweet_list2 = sorted(tweet_list2, reverse=True, key=lambda x: x[1])
-                            ###########
-                            sys.exit()
+                        if send_time < d and send_flag:
+                            send_flag = False
+                            tweet_list = sorted(tweet_list, reverse=True, key=lambda x: x[1])
+                            browser(json.dumps(tweet_list))
 
         except ChunkedEncodingError as chunkError:
             print(traceback.format_exc())
