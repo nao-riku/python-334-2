@@ -105,9 +105,9 @@ def get_stream(headers):
     global oath
     tweet_list = []
     now = datetime.datetime.now()
-    start_time = datetime.datetime(now.year, now.month, now.day, 27 - 9, 34, 0)
-    end_time = datetime.datetime(now.year, now.month, now.day, 27 - 9, 34, 1)
-    send_time = datetime.datetime(now.year, now.month, now.day, 27 - 9, 34, 2)
+    start_time = datetime.datetime(now.year, now.month, now.day, 3, 34, 0)
+    end_time = datetime.datetime(now.year, now.month, now.day, 3, 34, 1)
+    send_time = datetime.datetime(now.year, now.month, now.day, 3, 34, 2)
     send_flag = True
     run = 1
     while run:
@@ -169,7 +169,7 @@ delete = delete_all_rules(rules)
 set = set_rules(delete)
    
 now = datetime.datetime.now()
-start = datetime.datetime(now.year, now.month, now.day, 27 - 9, 33, 40, 0)
+start = datetime.datetime(now.year, now.month, now.day, 3, 33, 40, 0)
 diff = start - now
 print("Start sleep")
 time.sleep(diff.total_seconds())
