@@ -18,6 +18,7 @@ import sys
 RETRY = 0
 
 def browser(tweets):
+    print(tweets)
     print("Start Browsing")
     options = Options()
     options.add_argument('--headless')
@@ -45,7 +46,7 @@ def browser(tweets):
         print("Err")
         print(e)
         global RETRY
-        if RETRY < 4:
+        if RETRY < 1:
             time.sleep(5)
             RETRY += 1
             browser(tweets)
@@ -106,11 +107,11 @@ def get_stream(headers):
     tweet_list = []
     now = datetime.datetime.now()
     start_time = datetime.datetime(now.year, now.month, now.day, 3, 34, 0)
-    start_time = datetime.datetime(now.year, now.month, now.day, 3, 7, 0)
+    start_time = datetime.datetime(now.year, now.month, now.day, 3, 12, 0)
     end_time = datetime.datetime(now.year, now.month, now.day, 3, 34, 1)
-    end_time = datetime.datetime(now.year, now.month, now.day, 3, 7, 5)
+    end_time = datetime.datetime(now.year, now.month, now.day, 3, 12, 5)
     send_time = datetime.datetime(now.year, now.month, now.day, 3, 34, 2)
-    send_time = datetime.datetime(now.year, now.month, now.day, 3, 7, 6)
+    send_time = datetime.datetime(now.year, now.month, now.day, 3, 12, 6)
     send_flag = True
     run = 1
     while run:
@@ -173,7 +174,7 @@ set = set_rules(delete)
    
 now = datetime.datetime.now()
 start = datetime.datetime(now.year, now.month, now.day, 3, 33, 40, 0)
-start = datetime.datetime(now.year, now.month, now.day, 3, 6, 40, 0)
+start = datetime.datetime(now.year, now.month, now.day, 3, 11, 40, 0)
 now = datetime.datetime.now()
 diff = start - now
 print("Start sleep")
