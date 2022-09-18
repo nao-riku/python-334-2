@@ -16,10 +16,8 @@ import json
 import sys
 
 RETRY = 0
-senddata = []
 
 def browser(tweets):
-    global senddata
     print("Start Browsing")
     options = Options()
     options.add_argument('--headless')
@@ -34,7 +32,7 @@ def browser(tweets):
     try:
         wait = WebDriverWait(driver, 10).until(expected_conditions.alert_is_present())
         Alert(driver).accept()
-        pyperclip.copy(json.dumps(senddata))
+        pyperclip.copy(json.dumps(tweets))
         actions = ActionChains(driver)
         actions.key_down(Keys.TAB)
         actions.key_down(Keys.TAB)
@@ -50,7 +48,7 @@ def browser(tweets):
         if RETRY < 4:
             time.sleep(5)
             RETRY += 1
-            browser()
+            browser(tweets)
         else:
             print("AllErr")
             sys.exit()
@@ -104,7 +102,7 @@ def set_rules(delete):
     #print(json.dumps(response.json()))
 
 def get_stream(headers):
-    global oath, senddata
+    global oath
     tweet_list = []
     now = datetime.datetime.now()
     start_time = datetime.datetime(now.year, now.month, now.day, 3, 34, 0)
@@ -143,7 +141,6 @@ def get_stream(headers):
                         if send_time.time() < d.time() and send_flag:
                             send_flag = False
                             tweet_list = sorted(tweet_list, reverse=True, key=lambda x: x[1])
-                            senddata = tweet_list
                             browser(json.dumps(tweet_list))
 
         except ChunkedEncodingError as chunkError:
