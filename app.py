@@ -16,8 +16,10 @@ import json
 import sys
 
 RETRY = 0
+senddata = []
 
 def browser(tweets):
+    global senddata
     print("Start Browsing")
     options = Options()
     options.add_argument('--headless')
@@ -32,7 +34,7 @@ def browser(tweets):
     try:
         wait = WebDriverWait(driver, 10).until(expected_conditions.alert_is_present())
         Alert(driver).accept()
-        pyperclip.copy(json.dumps(b))
+        pyperclip.copy(json.dumps(senddata))
         actions = ActionChains(driver)
         actions.key_down(Keys.TAB)
         actions.key_down(Keys.TAB)
@@ -102,15 +104,15 @@ def set_rules(delete):
     #print(json.dumps(response.json()))
 
 def get_stream(headers):
-    global oath
+    global oath, senddata
     tweet_list = []
     now = datetime.datetime.now()
     start_time = datetime.datetime(now.year, now.month, now.day, 3, 34, 0)
-    start_time = datetime.datetime(now.year, now.month, now.day, 2, 52, 0)
+    start_time = datetime.datetime(now.year, now.month, now.day, 2, 56, 0)
     end_time = datetime.datetime(now.year, now.month, now.day, 3, 34, 1)
-    end_time = datetime.datetime(now.year, now.month, now.day, 2, 52, 1)
+    end_time = datetime.datetime(now.year, now.month, now.day, 2, 56, 1)
     send_time = datetime.datetime(now.year, now.month, now.day, 3, 34, 2)
-    send_time = datetime.datetime(now.year, now.month, now.day, 2, 52, 2)
+    send_time = datetime.datetime(now.year, now.month, now.day, 2, 56, 2)
     send_flag = True
     run = 1
     while run:
@@ -141,6 +143,7 @@ def get_stream(headers):
                         if send_time.time() < d.time() and send_flag:
                             send_flag = False
                             tweet_list = sorted(tweet_list, reverse=True, key=lambda x: x[1])
+                            senddata = tweet_list
                             browser(json.dumps(tweet_list))
 
         except ChunkedEncodingError as chunkError:
@@ -173,7 +176,7 @@ set = set_rules(delete)
    
 now = datetime.datetime.now()
 start = datetime.datetime(now.year, now.month, now.day, 3, 33, 40, 0)
-start = datetime.datetime(now.year, now.month, now.day, 2, 51, 40, 0)
+start = datetime.datetime(now.year, now.month, now.day, 2, 55, 40, 0)
 now = datetime.datetime.now()
 diff = start - now
 print("Start sleep")
