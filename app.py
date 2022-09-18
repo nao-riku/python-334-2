@@ -94,7 +94,7 @@ def delete_all_rules(rules):
     #print(json.dumps(response.json()))
 
 def set_rules(delete):
-    rules = [{"value":"\"334\" -is:retweet -is:reply -is:quote"}]
+    rules = [{"value":"大阪"##[{"value":"\"334\" -is:retweet -is:reply -is:quote"}]
     payload = {"add": rules}
     response = requests.post("https://api.twitter.com/2/tweets/search/stream/rules", auth=bearer_oauth, json=payload)
     if response.status_code != 201:
@@ -106,8 +106,11 @@ def get_stream(headers):
     tweet_list = []
     now = datetime.datetime.now()
     start_time = datetime.datetime(now.year, now.month, now.day, 3, 34, 0)
+    start_time = datetime.datetime(now.year, now.month, now.day, 2, 10, 0)
     end_time = datetime.datetime(now.year, now.month, now.day, 3, 34, 1)
+    end_time = datetime.datetime(now.year, now.month, now.day, 2, 10, 1)
     send_time = datetime.datetime(now.year, now.month, now.day, 3, 34, 2)
+    send_time = datetime.datetime(now.year, now.month, now.day, 2, 10, 2)
     send_flag = True
     run = 1
     while run:
@@ -120,8 +123,8 @@ def get_stream(headers):
                         json_response = json.loads(response_line)
                         epoch = ((int(json_response["data"]["id"]) >> 22) + 1288834974657) / 1000.0
                         d = datetime.datetime.fromtimestamp(epoch)
-                        if tweet_text == "334":
-                            if start_time <= d < end_time:
+                        if tweet_text != "334":##########################
+                            if start_time.time() <= d.time() < end_time.time():
                                 tweet_text = json_response["data"]["text"]
                                 diff = d - start_time
                                 tweetdata = [
@@ -135,7 +138,7 @@ def get_stream(headers):
                                 ]
                                 tweet_list.append(tweetdata)
 							
-                        if send_time < d and send_flag:
+                        if send_time.time() < d.time() and send_flag:
                             send_flag = False
                             tweet_list = sorted(tweet_list, reverse=True, key=lambda x: x[1])
                             browser(json.dumps(tweet_list))
@@ -170,6 +173,8 @@ set = set_rules(delete)
    
 now = datetime.datetime.now()
 start = datetime.datetime(now.year, now.month, now.day, 3, 33, 40, 0)
+start = datetime.datetime(now.year, now.month, now.day, 2, 9, 40, 0)
+now = datetime.datetime.now()
 diff = start - now
 print("Start sleep")
 time.sleep(diff.total_seconds())
