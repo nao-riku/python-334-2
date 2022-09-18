@@ -94,7 +94,7 @@ def delete_all_rules(rules):
     #print(json.dumps(response.json()))
 
 def set_rules(delete):
-    rules = [{"value":"大阪"##[{"value":"\"334\" -is:retweet -is:reply -is:quote"}]
+    rules = [{"value":"大阪"}]##[{"value":"\"334\" -is:retweet -is:reply -is:quote"}]
     payload = {"add": rules}
     response = requests.post("https://api.twitter.com/2/tweets/search/stream/rules", auth=bearer_oauth, json=payload)
     if response.status_code != 201:
@@ -106,11 +106,11 @@ def get_stream(headers):
     tweet_list = []
     now = datetime.datetime.now()
     start_time = datetime.datetime(now.year, now.month, now.day, 3, 34, 0)
-    start_time = datetime.datetime(now.year, now.month, now.day, 2, 10, 0)
+    start_time = datetime.datetime(now.year, now.month, now.day, 2, 12, 0)
     end_time = datetime.datetime(now.year, now.month, now.day, 3, 34, 1)
-    end_time = datetime.datetime(now.year, now.month, now.day, 2, 10, 1)
+    end_time = datetime.datetime(now.year, now.month, now.day, 2, 12, 1)
     send_time = datetime.datetime(now.year, now.month, now.day, 3, 34, 2)
-    send_time = datetime.datetime(now.year, now.month, now.day, 2, 10, 2)
+    send_time = datetime.datetime(now.year, now.month, now.day, 2, 12, 2)
     send_flag = True
     run = 1
     while run:
@@ -173,7 +173,7 @@ set = set_rules(delete)
    
 now = datetime.datetime.now()
 start = datetime.datetime(now.year, now.month, now.day, 3, 33, 40, 0)
-start = datetime.datetime(now.year, now.month, now.day, 2, 9, 40, 0)
+start = datetime.datetime(now.year, now.month, now.day, 2, 11, 40, 0)
 now = datetime.datetime.now()
 diff = start - now
 print("Start sleep")
