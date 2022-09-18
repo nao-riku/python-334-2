@@ -18,7 +18,6 @@ import sys
 RETRY = 0
 
 def browser(tweets):
-    print(tweets)
     print("Start Browsing")
     options = Options()
     options.add_argument('--headless')
@@ -39,7 +38,6 @@ def browser(tweets):
         actions.key_down(Keys.TAB)
         actions.key_down(Keys.COMMAND)
         actions.send_keys('v').perform()
-    
         wait2 = WebDriverWait(driver, 30).until(expected_conditions.alert_is_present())
     except Exception as e:
         driver.quit()
@@ -95,7 +93,7 @@ def delete_all_rules(rules):
     #print(json.dumps(response.json()))
 
 def set_rules(delete):
-    rules = [{"value":"を"}]##[{"value":"\"334\" -is:retweet -is:reply -is:quote"}]
+    rules = [{"value":"\"334\" -is:retweet -is:reply -is:quote"}]
     payload = {"add": rules}
     response = requests.post("https://api.twitter.com/2/tweets/search/stream/rules", auth=bearer_oauth, json=payload)
     if response.status_code != 201:
@@ -107,11 +105,8 @@ def get_stream(headers):
     tweet_list = []
     now = datetime.datetime.now()
     start_time = datetime.datetime(now.year, now.month, now.day, 3, 34, 0)
-    start_time = datetime.datetime(now.year, now.month, now.day, 4, 17, 0)
     end_time = datetime.datetime(now.year, now.month, now.day, 3, 34, 1)
-    end_time = datetime.datetime(now.year, now.month, now.day, 4, 17, 5)
     send_time = datetime.datetime(now.year, now.month, now.day, 3, 34, 2)
-    send_time = datetime.datetime(now.year, now.month, now.day, 4, 17, 6)
     send_flag = True
     run = 1
     while run:
@@ -125,7 +120,7 @@ def get_stream(headers):
                         tweet_text = json_response["data"]["text"]
                         epoch = ((int(json_response["data"]["id"]) >> 22) + 1288834974657) / 1000.0
                         d = datetime.datetime.fromtimestamp(epoch)
-                        if tweet_text != "334":##########################
+                        if tweet_text == "334":
                             if start_time.time() <= d.time() < end_time.time():
                                 diff = d - start_time
                                 tweetdata = [
@@ -174,7 +169,6 @@ set = set_rules(delete)
    
 now = datetime.datetime.now()
 start = datetime.datetime(now.year, now.month, now.day, 3, 33, 40, 0)
-start = datetime.datetime(now.year, now.month, now.day, 4, 16, 40, 0)
 now = datetime.datetime.now()
 diff = start - now
 print("Start sleep")
