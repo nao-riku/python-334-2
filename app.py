@@ -136,7 +136,7 @@ def get_stream(headers):
                                 tweet_list1.append(tweetdata)
                             if start_time <= d < end_time2:
                                 tweetdata2 = [
-                                    json_response["data"]["author_id"],
+                                    str(json_response["data"]["author_id"]),
                                     json_response["includes"]["users"][0]["name"],
                                     '{:.3f}'.format(diff.total_seconds())
                                 ]
