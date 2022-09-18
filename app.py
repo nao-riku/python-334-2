@@ -123,19 +123,24 @@ def get_stream(headers):
                             epoch = ((int(json_response["data"]["id"]) >> 22) + 1288834974657) / 1000.0
                             d = datetime.datetime.fromtimestamp(epoch)
                             diff = d - start_time
-                            tweetdata = [
-                                json_response["includes"]["users"][0]["profile_image_url"],
-                                json_response["includes"]["users"][0]["name"],
-                                '{:.3f}'.format(diff.total_seconds()),
-                                json_response["data"]["source"],
-                                json_response["data"]["id"],
-                                json_response["includes"]["users"][0]["username"],
-                                json_response["data"]["author_id"]
-                            ]
                             if start_time <= d < end_time1:
+                                tweetdata = [
+                                    json_response["includes"]["users"][0]["profile_image_url"],
+                                    json_response["includes"]["users"][0]["name"],
+                                    '{:.3f}'.format(diff.total_seconds()),
+                                    json_response["data"]["source"],
+                                    json_response["data"]["id"],
+                                    json_response["includes"]["users"][0]["username"],
+                                    json_response["data"]["author_id"]
+                                ]
                                 tweet_list1.append(tweetdata)
-			                if start_time <= d < end_time2:
-                                tweet_list2.append(tweetdata)
+                            if start_time <= d < end_time2:
+                                tweetdata2 = [
+                                    json_response["data"]["author_id"],
+                                    json_response["includes"]["users"][0]["name"],
+                                    '{:.3f}'.format(diff.total_seconds())
+                                ]
+                                tweet_list2.append(tweetdata2)
                             if send_time < d and send_flag:
                                 send_flag = False
                                 tweet_list1 = sorted(tweet_list1, reverse=True, key=lambda x: x[1])
