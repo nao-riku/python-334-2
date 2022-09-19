@@ -100,13 +100,13 @@ def set_rules(delete):
         raise Exception("Cannot add rules (HTTP {}): {}".format(response.status_code, response.text))
     #print(json.dumps(response.json()))
 
-def get_stream(headers):
+def get_stream():
     global oath
     tweet_list = []
     now = datetime.datetime.now()
-    start_time = datetime.datetime(now.year, now.month, now.day, 16, 9, 0)
-    end_time = datetime.datetime(now.year, now.month, now.day, 16, 9, 1)
-    send_time = datetime.datetime(now.year, now.month, now.day, 16, 9, 2)
+    start_time = datetime.datetime(now.year, now.month, now.day, 3, 34, 0)
+    end_time = datetime.datetime(now.year, now.month, now.day, 3, 34, 1)
+    send_time = datetime.datetime(now.year, now.month, now.day, 3, 34, 3)
     send_flag = True
     run = 1
     while run:
@@ -136,6 +136,7 @@ def get_stream(headers):
 							
                         if send_time.time() < d.time() and send_flag:
                             send_flag = False
+                            run = 0
                             tweet_list = sorted(tweet_list, reverse=False, key=lambda x: x[2])
                             browser(json.dumps(tweet_list))
 
@@ -163,15 +164,15 @@ class ChunkedEncodingError(Exception):
     pass
 
 
-rules = get_rules()
-delete = delete_all_rules(rules)
-set = set_rules(delete)
+#rules = get_rules()
+#delete = delete_all_rules(rules)
+#set = set_rules(delete)
    
 now = datetime.datetime.now()
-start = datetime.datetime(now.year, now.month, now.day, 16, 8, 40, 0)
+start = datetime.datetime(now.year, now.month, now.day, 3, 33, 40, 0)
 diff = start - now
 print("Start sleep")
 time.sleep(diff.total_seconds())
 
-get_stream(set)
+get_stream()
 
