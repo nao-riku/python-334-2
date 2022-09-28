@@ -7,6 +7,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions
 from requests_oauthlib import OAuth1Session
+import chromedriver_binary
 import pyperclip
 import requests
 import traceback
@@ -175,4 +176,5 @@ print("Start sleep")
 #time.sleep(diff.total_seconds())
 
 #get_stream()
+browser("[]")
 
