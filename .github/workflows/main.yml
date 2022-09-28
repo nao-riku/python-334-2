@@ -29,4 +29,4 @@ jobs:
           BT: ${{ secrets.BT }}
           URL: ${{ secrets.URL }}
           TZ: "Asia/Tokyo"
-        run: python app.py
+        #run: python app.py
