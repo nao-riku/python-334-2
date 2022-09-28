@@ -173,8 +173,7 @@ now = datetime.datetime.now()
 start = datetime.datetime(now.year, now.month, now.day, 3, 33, 40, 0)
 diff = start - now
 print("Start sleep")
-#time.sleep(diff.total_seconds())
+time.sleep(diff.total_seconds())
 
-#get_stream()
-browser("[]")
+get_stream()
 
