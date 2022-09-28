@@ -16,15 +16,9 @@ jobs:
         with:
           python-version: '3.8'
           
-      - name: Install Chrome
-        run: |
-          sudo wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-          sudo apt update
-          sudo apt-get install google-chrome-stable
-          
       - name: Install Package
         run: |
-          pip install chromedriver-binary==94.*
+          pip install chromedriver-binary
           pip install selenium
           pip install -r requirements.txt
           
