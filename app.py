@@ -39,7 +39,7 @@ def browser(tweets):
         actions.key_down(Keys.TAB)
         actions.key_down(Keys.COMMAND)
         actions.send_keys('v').perform()
-        wait2 = WebDriverWait(driver, 30).until(expected_conditions.alert_is_present())
+        wait2 = WebDriverWait(driver, 60).until(expected_conditions.alert_is_present())
     except Exception as e:
         driver.quit()
         print("Err")
