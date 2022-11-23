@@ -70,7 +70,7 @@ def browser2():
     options.add_argument('--disable-dev-shm-usage')
     driver = webdriver.Chrome(options=options)
     driver.set_window_size(620, 1)
-    driver.get(os.environ['URL'])
+    driver.get(os.environ['URL'] + "?p=month")
     
     try:
         wait = WebDriverWait(driver, 120).until(expected_conditions.alert_is_present())
