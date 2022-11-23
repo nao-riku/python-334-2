@@ -20,6 +20,7 @@ RETRY = 0
 
 def browser(tweets):
     print("Start Browsing")
+    global RETRY
     options = Options()
     options.add_argument('--headless')
     options.add_argument('--disable-gpu')
@@ -44,7 +45,6 @@ def browser(tweets):
         driver.quit()
         print("Err")
         print(e)
-        global RETRY
         if RETRY < 5:
             time.sleep(5)
             RETRY += 1
@@ -55,7 +55,42 @@ def browser(tweets):
     else:
         driver.quit()
         print("End")
+        time.sleep(90)
+        RETRY = 0
+        browser2()
+
+
+def browser2():
+    print("Start Browsing2")
+    options = Options()
+    options.add_argument('--headless')
+    options.add_argument('--disable-gpu')
+    options.add_argument('--no-sandbox')
+    options.add_argument('--disable-extensions')
+    options.add_argument('--disable-dev-shm-usage')
+    driver = webdriver.Chrome(options=options)
+    driver.set_window_size(620, 1)
+    driver.get(os.environ['URL'] + "?p=month")
+    
+    try:
+        wait = WebDriverWait(driver, 120).until(expected_conditions.alert_is_present())
+    except Exception as e:
+        driver.quit()
+        print("Err")
+        print(e)
+        global RETRY
+        if RETRY < 5:
+            time.sleep(5)
+            RETRY += 1
+            browser2()
+        else:
+            print("AllErr")
+            sys.exit()
+    else:
+        driver.quit()
+        print("End")
         sys.exit()
+
 
 
 consumer_key = os.environ['CK']
