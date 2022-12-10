@@ -159,11 +159,15 @@ def get_stream():
                         if tweet_text == "334":
                             if start_time.time() <= d.time() < end_time.time():
                                 diff = d - start_time
+                                if "source" in json_response['data']:
+                                    source = json_response["data"]["source"]
+                                else:
+                                    source = "undefined"
                                 tweetdata = [
                                     json_response["includes"]["users"][0]["profile_image_url"],
                                     json_response["includes"]["users"][0]["name"],
                                     '{:.3f}'.format(diff.total_seconds()),
-                                    json_response["data"]["source"],
+                                    source,
                                     json_response["data"]["id"],
                                     json_response["includes"]["users"][0]["username"],
                                     json_response["data"]["author_id"]
